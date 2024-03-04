@@ -46,16 +46,15 @@ mail_field.send_keys(MAIL)
 time.sleep(1)
 login_btn.click()
 
-checker = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MAIL}')]")))
+checked = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MAIL}')]")))
 
-if checker:
+if checked:
 	print_as_log(colored("Logged in!", 'green'))
-	balance_field = browser.find_element(By.ID, "balance")
-	print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 	print_as_log("Preparing for new claim...")
-	n = 0
+
 	while True:
-		n += 1
+		balance_field = browser.find_element(By.ID, "balance")
+		print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 
 		try:
 			login_btn = WebDriverWait(browser, 5).until(EC.presence_of_element_located((By.XPATH, '//button[@type="submit"]')))
@@ -89,9 +88,6 @@ if checker:
 		print_as_log(colored("=== New claim triggered ===", 'white', 'on_green'))
 		ok_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@class="swal-button swal-button--confirm"]')))
 		ok_btn.click()
-		time.sleep(3)
-		balance_field = browser.find_element(By.ID, "balance")
-		print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 
 		progress_bar = tqdm(total=300, unit="time")
 		for i in range(300):
