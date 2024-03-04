@@ -1,0 +1,4 @@
+tqdm
+termcolor
+python-dotenv
+selenium==4.9.1

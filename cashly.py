@@ -2,7 +2,6 @@ import os
 import time
 from tqdm import tqdm
 from termcolor import colored
-from twocaptcha import TwoCaptcha
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -27,6 +26,7 @@ print("Mobile: " + colored("+261 32 61 968 23\n\n", 'yellow'))
 opts = Options()
 opts.add_argument("--width=240")
 opts.add_argument("--height=800")
+# opts.add_argument("--headless")
 opts.add_argument("--user-agent=Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
 browser = webdriver.Firefox(options=opts)
 
@@ -37,6 +37,7 @@ def print_as_log(log):
 	print(f"[{m_time}] {log}")
 
 
+print_as_log("Login...")
 browser.get(URL)
 login_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@type="submit"]')))
 mail_field = browser.find_element(By.NAME, "address")
@@ -49,6 +50,8 @@ checker = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.X
 
 if checker:
 	print_as_log(colored("Logged in!", 'green'))
+	balance_field = browser.find_element(By.ID, "balance")
+	print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 	n = 0
 	while True:
 		n += 1
@@ -65,7 +68,7 @@ if checker:
 
 		c_btn = browser.find_element(By.ID, "requestdaily")
 		c_btn.click()
-		
+
 		rec_frame = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
 		browser.switch_to.frame(rec_frame)
 		time.sleep(3)
@@ -83,6 +86,8 @@ if checker:
 		claim_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@type="submit"]')))
 		claim_btn.click()
 		print_as_log(colored("=== New claim triggered ===", 'white', 'on_green'))
+		balance_field = browser.find_element(By.ID, "balance")
+		print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 		ok_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@class="swal-button swal-button--confirm"]')))
 		ok_btn.click()
 
