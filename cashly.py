@@ -52,6 +52,7 @@ if checker:
 	print_as_log(colored("Logged in!", 'green'))
 	balance_field = browser.find_element(By.ID, "balance")
 	print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
+	print_as_log("Preparing for new claim...")
 	n = 0
 	while True:
 		n += 1
