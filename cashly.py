@@ -26,7 +26,7 @@ print("Mobile: " + colored("+261 32 61 968 23\n\n", 'yellow'))
 opts = Options()
 opts.add_argument("--width=240")
 opts.add_argument("--height=800")
-# opts.add_argument("--headless")
+opts.add_argument("--headless")
 opts.add_argument("--user-agent=Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
 browser = webdriver.Firefox(options=opts)
 
