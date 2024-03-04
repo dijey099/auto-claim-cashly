@@ -51,7 +51,7 @@ checked = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.X
 if checked:
 	print_as_log(colored("Logged in!", 'green'))
 	balance_field = browser.find_element(By.ID, "balance")
-	print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
+	print_as_log(colored(f"Balance: ${balance_field.text}", 'cyan', attrs=['bold']))
 	print_as_log("Preparing for new claim...")
 
 	while True:
@@ -79,17 +79,17 @@ if checked:
 			print_as_log("Captcha solved successfully!")
 			browser.switch_to.default_content()
 		except:
-			print_as_log("Captcha not solved! Exiting...")
+			print_as_log(colored("Captcha not solved! Exiting...", "red"))
 			browser.quit()
 
 		claim_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@type="submit"]')))
 		claim_btn.click()
-		print_as_log(colored("=== New claim triggered ===", 'white', 'on_green'))
+		print_as_log(colored("= New claim triggered =", 'white', 'on_green'))
 		ok_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@class="swal-button swal-button--confirm"]')))
 		ok_btn.click()
 		time.sleep(5)
 		balance_field = browser.find_element(By.ID, "balance")
-		print_as_log(colored(f"Balance: ${balance_field.text}", 'cyan'))
+		print_as_log(colored(f"Balance: ${balance_field.text}", 'cyan', attrs=['bold']))
 
 		progress_bar = tqdm(total=300, unit="time")
 		for i in range(300):
