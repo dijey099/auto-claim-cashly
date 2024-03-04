@@ -26,7 +26,7 @@ print("Mobile: " + colored("+261 32 61 968 23\n\n", 'yellow'))
 opts = Options()
 opts.add_argument("--width=240")
 opts.add_argument("--height=800")
-opts.add_argument("--headless")
+# opts.add_argument("--headless")
 opts.add_argument("--user-agent=Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
 browser = webdriver.Firefox(options=opts)
 
@@ -91,11 +91,8 @@ if checked:
 		balance_field = browser.find_element(By.ID, "balance")
 		print_as_log(colored(f"Balance: ${balance_field.text}", 'cyan', attrs=['bold']))
 
-		progress_bar = tqdm(total=300, unit="time")
-		for i in range(300):
+		for i in tqdm(range(300), bar_format='{l_bar}{bar}|{remaining}', leave=False):
 			time.sleep(1)
-			progress_bar.update(1)
-		progress_bar.close()
 		print_as_log("Preparing for new claim...")
 		browser.refresh()
 		time.sleep(5)
