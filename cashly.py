@@ -70,12 +70,12 @@ if checked:
 
 		rec_frame = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//iframe[@title="reCAPTCHA"]')))
 		browser.switch_to.frame(rec_frame)
-		time.sleep(3)
+		time.sleep(5)
 		rec_btn = browser.find_element(By.ID, "recaptcha-anchor")
 		rec_btn.click()
 
 		try:
-			WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//div[@class="recaptcha-checkbox-checkmark" and @style=""]')))
+			WebDriverWait(browser, 10).until(EC.presence_of_element_located((By.XPATH, '//div[@class="recaptcha-checkbox-checkmark" and @style=""]')))
 			print_as_log("Captcha solved successfully!")
 			browser.switch_to.default_content()
 		except:
