@@ -51,7 +51,7 @@ checked = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.X
 if checked:
 	print_as_log(colored("Logged in!", 'green'))
 	balance_field = browser.find_element(By.ID, "balance")
-	print_as_log(colored(f"Balance: ${balance_field.text}", 'cyan'))
+	print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 	print_as_log("Preparing for new claim...")
 
 	while True:
@@ -89,7 +89,7 @@ if checked:
 		ok_btn.click()
 		time.sleep(5)
 		balance_field = browser.find_element(By.ID, "balance")
-		print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
+		print_as_log(colored(f"Balance: ${balance_field.text}", 'cyan'))
 
 		progress_bar = tqdm(total=300, unit="time")
 		for i in range(300):
