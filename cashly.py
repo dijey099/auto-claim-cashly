@@ -77,7 +77,7 @@ if checker:
 		rec_btn.click()
 
 		try:
-			WebDriverWait(browser, 15).until(EC.presence_of_element_located((By.XPATH, '//div[@class="recaptcha-checkbox-checkmark" and @style=""]')))
+			WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.XPATH, '//div[@class="recaptcha-checkbox-checkmark" and @style=""]')))
 			print_as_log("Captcha solved successfully!")
 			browser.switch_to.default_content()
 		except:
@@ -87,10 +87,11 @@ if checker:
 		claim_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@type="submit"]')))
 		claim_btn.click()
 		print_as_log(colored("=== New claim triggered ===", 'white', 'on_green'))
-		balance_field = browser.find_element(By.ID, "balance")
-		print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 		ok_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@class="swal-button swal-button--confirm"]')))
 		ok_btn.click()
+		time.sleep(3)
+		balance_field = browser.find_element(By.ID, "balance")
+		print_as_log(colored(f"Balance: ${balance_field.text}", 'white', 'on_cyan'))
 
 		progress_bar = tqdm(total=300, unit="time")
 		for i in range(300):
