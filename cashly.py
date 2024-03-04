@@ -81,6 +81,7 @@ if checked:
 		except:
 			print_as_log(colored("Captcha not solved! Exiting...", "red"))
 			browser.quit()
+			exit()
 
 		claim_btn = WebDriverWait(browser, 100).until(EC.presence_of_element_located((By.XPATH, '//button[@type="submit"]')))
 		claim_btn.click()
